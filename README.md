@@ -1,4 +1,4 @@
-# Inteligentny Wzmacniacz Audio Bluetooth (ESP32 + PCM5102 + TDA7388 + Chłodzenie)
+# Wzmacniacz Audio Bluetooth ESP32 
 
 Projekt "bezgłowego" (headless) odbiornika audio Bluetooth o wysokiej jakości, zbudowanego na bazie modułu ESP32-WROOM-32UE (DevKitC), przetwornika DAC PCM5102 i wzmacniacza samochodowego TDA7388. Całość uzupełnia inteligentny system chłodzenia, sterowany czujnikiem temperatury DS18B20 oraz tranzystorem MOSFET.
 
@@ -356,4 +356,5 @@ Ten projekt jest przeznaczony do kompilacji i wgrania za pomocą PlatformIO IDE 
 ---
 
 ## 📝 Struktura Projektu
+
 
