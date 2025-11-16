@@ -50,7 +50,7 @@ Poniższy schemat przedstawia połączenia komponentów z płytką ESP32-DevKitC
 | `3V3` | `PCM5102A` | `VCC` | Zasilanie 3.3V dla DAC |
 | `GND` | `PCM5102A` | `GND` | Wspólna Masa |
 
-![Tekst alternatywny](GPIO (1).png)
+![Podłączenie wzmacniacza TDA7388](github.com/Jankos01/ESP32-TDA7388-/blob/main/IMG/GPIO%20(1).png?raw=true) 
 
 **Tutaj wstaw link do zdjęcia pokazującego podłączenie modułu DAC:**
 
@@ -384,6 +384,7 @@ Ten projekt jest przeznaczony do kompilacji i wgrania za pomocą PlatformIO IDE 
 ---
 
 ## 📝 Struktura Projektu
+
 
 
 
