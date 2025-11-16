@@ -36,26 +36,51 @@ Projekt koncentruje się na stabilności, jakości dźwięku oraz efektywnym zar
 
 Poniższy schemat przedstawia połączenia komponentów z płytką ESP32-DevKitC, bazując na jej standardowym pinoucie.
 
-![Schemat Połączeń Inteligentnego Wzmacniacza Bluetooth ESP32 v2](https://i.imgur.com/TwoiEaW.png)
 
 ### Szczegółowa Lista Połączeń:
 
-| Moduł ESP32-DevKitC Pin (GPIO) | Komponent Docelowy | Uwagi |
-| :----------------------------- | :----------------- | :---- |
-| **`GPIO12`** | `DIN` (DAC PCM5102)  | I2S Data |
-| **`GPIO13`** | `LRC` (DAC PCM5102)  | I2S Word Select (Left/Right Clock) |
-| **`GPIO14`** | `BCK` (DAC PCM5102)  | I2S Bit Clock |
-| **`GPIO27`** | `SCK` (DAC PCM5102)  | Pin SCK z DAC powinien być podłączony do tego GPIO, które jest ustawione na LOW (GND) w kodzie, aby zapewnić prawidłową pracę PCM5102. |
-| **`GPIO32`** | `ST-BY` (TDA7388)    | Pin Standby wzmacniacza (wymaga filtra RC dla anti-pop, jeśli nie jest wbudowany we wzmacniaczu) |
-| **`GPIO33`** | `MUTE` (TDA7388)     | Pin Mute wzmacniacza (wymaga filtra RC dla anti-pop, jeśli nie jest wbudowany we wzmacniaczu) |
-| **`GPIO17`** | `DATA` (DS18B20)     | Linia danych czujnika temperatury 1-Wire. **Wymaga zewnętrznego rezystora pull-up 4.7kΩ do 3.3V.** |
-| **`GPIO16`** | `GATE` (MOSFET IRLZ44N) | Sterowanie bramką tranzystora MOSFET. **Wymaga rezystora pull-down 10kΩ do GND.** |
-| **`3V3`** | `VCC` (DAC PCM5102)  | Zasilanie DAC |
-| **`3V3`** | `VCC` (DS18B20)      | Zasilanie czujnika temperatury |
-| **`GND`** | `GND` (DAC PCM5102)  | Wspólna masa |
-| **`GND`** | `GND` (DS18B20)      | Wspólna masa |
-| **`GND`** | `SOURCE` (MOSFET IRLZ44N) | Wspólna masa dla tranzystora |
-| **`GND`** | `GND` (TDA7388)      | Wspólna masa dla wzmacniacza. **Kluczowe jest, aby wszystkie GND były połączone!** |
+#### 1\. Połączenia ESP32 ➡️ Przetwornik DAC (PCM5102)
+
+| Pin ESP32 (GPIO) | Moduł Docelowy | Pin Docelowy | Uwagi |
+| :--- | :--- | :--- | :--- |
+| **`GPIO12`** | `PCM5102A` | `DIN` (Data) | I2S Data (dane cyfrowe audio) |
+| **`GPIO13`** | `PCM5102A` | `LRC` (WS) | I2S Word Select (Zegar Lewy/Prawy) |
+| **`GPIO14`** | `PCM5102A` | `BCK` | I2S Bit Clock (Zegar bitowy) |
+| **`GPIO27`** | `PCM5102A` | `SCK` | Programowe zwarcie do GND (wymagane przez PCM5102) |
+| `3V3` | `PCM5102A` | `VCC` | Zasilanie 3.3V dla DAC |
+| `GND` | `PCM5102A` | `GND` | Wspólna Masa |
+
+**Tutaj wstaw link do zdjęcia pokazującego podłączenie modułu DAC:**
+![Podłączenie modułu DAC PCM5102]([img/dac_polaczenia.png](https://github.com/Jankos01/ESP32-TDA7388-/blob/main/IMG/GPIO%20(1).png)) #### 2\. Połączenia ➡️ Wzmacniacz (TDA7388)
+
+| Źródło Sygnału | Moduł Docelowy | Pin Docelowy | Uwagi |
+| :--- | :--- | :--- | :--- |
+| **`GPIO32`** | `TDA7388` | `ST-BY` (Pin 22) | Sterowanie Standby (Zalecany filtr RC 10kΩ + 4.7µF) |
+| **`GPIO33`** | `TDA7388` | `MUTE` (Pin 4) | Sterowanie Mute (Zalecany filtr RC 10kΩ + 1µF) |
+| `L-OUT` (z PCM5102A) | `TDA7388` | `L-IN` | Wejście audio (Lewy kanał) |
+| `R-OUT` (z PCM5102A) | `TDA7388` | `R-IN` | Wejście audio (Prawy kanał) |
+| `+12V` (Zasilacz) | `TDA7388` | `VCC` | Główne zasilanie 12V |
+| `GND` (Wspólna) | `TDA7388` | `GND` | Wspólna Masa |
+
+**Tutaj wstaw link do zdjęcia pokazującego podłączenie wzmacniacza TDA7388:**
+![Podłączenie wzmacniacza TDA7388](https://i.imgur.com/TwoiEaW.png) #### 3\. Połączenia ➡️ System Chłodzenia (Czujnik + Wentylator)
+
+| Źródło Sygnału | Moduł Docelowy | Pin Docelowy | Uwagi |
+| :--- | :--- | :--- | :--- |
+| **`GPIO17`** | `DS18B20` | `DATA` | Linia danych 1-Wire |
+| `3V3` (z ESP32) | `DS18B20` | `VCC` | Zasilanie 3.3V |
+| `GND` (Wspólna) | `DS18B20` | `GND` | Wspólna Masa |
+| **(WAŻNE)** `3.3V` | Rezystor 4.7kΩ | `DATA` (DS18B20) | Rezystor Pull-up dla 1-Wire |
+| **`GPIO16`** | `MOSFET (Gate)` | `G` | Sygnał sterujący PWM |
+| `GND` (Wspólna) | `MOSFET (Source)`| `S` | Wspólna Masa |
+| **(WAŻNE)** `GND` | Rezystor 10kΩ | `Gate` (MOSFET) | Rezystor Pull-down (zapobiega włączeniu) |
+| `DRAIN` (z MOSFET) | `Wentylator 12V` | `Minus (-)` | Przełączanie masy wentylatora |
+| `+12V` (Zasilacz) | `Wentylator 12V` | `Plus (+)` | Zasilanie 12V wentylatora |
+
+**Tutaj wstaw link do zdjęcia pokazującego podłączenie systemu chłodzenia:**
+![Podłączenie systemu chłodzenia (DS18B20 + Wentylator + MOSFET)](img/chlodzenie_system.png) ```
+
+### Krok 4: Zapisz i wgraj zmiany na GitHub
 
 ---
 ## 💻 Przegląd Kodu
@@ -356,6 +381,7 @@ Ten projekt jest przeznaczony do kompilacji i wgrania za pomocą PlatformIO IDE 
 ---
 
 ## 📝 Struktura Projektu
+
 
 
 
