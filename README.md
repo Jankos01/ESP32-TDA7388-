@@ -1,14 +1,14 @@
 # Wzmacniacz Audio Bluetooth ESP32 
 
-Projekt "bezgłowego" (headless) odbiornika audio Bluetooth o wysokiej jakości, zbudowanego na bazie modułu ESP32-WROOM-32UE (DevKitC), przetwornika DAC PCM5102 i wzmacniacza samochodowego TDA7388. Całość uzupełnia inteligentny system chłodzenia, sterowany czujnikiem temperatury DS18B20 oraz tranzystorem MOSFET.
+Projekt  odbiornika audio Bluetooth zbudowanego na bazie modułu ESP32-WROOM-32UE (DevKitC), przetwornika DAC PCM5102 i wzmacniacza samochodowego TDA7388. Całość uzupełnia system chłodzenia, sterowany czujnikiem temperatury 
 
 Projekt koncentruje się na stabilności, jakości dźwięku oraz efektywnym zarządzaniu energią i temperaturą, co czyni go idealnym do zastosowań jako stacjonarny system audio.
 
 ## 🌟 Główne Funkcje
 
-* **Wysoka Jakość Dźwięku:** Przesyłanie sygnału audio przez interfejs I2S do zewnętrznego przetwornika DAC PCM5102 dla minimalizacji zakłóceń i poprawy wierności dźwięku.
+* **Wysoka Jakość Dźwięku:** Przesyłanie sygnału audio przez interfejs I2S do zewnętrznego przetwornika DAC PCM5102 
 * **Anti-Pop:** Eliminuje nieprzyjemne "stuknięcia" i "pyknięcia" w głośnikach podczas włączania i przełączania stanów wzmacniacza, poprzez precyzyjne sterowanie pinami `MUTE` i `ST-BY`.
-* **Inteligentne Sterowanie Wzmacniaczem TDA7388:**
+* **Automatyczne Sterowanie Wzmacniaczem TDA7388:**
     * Wzmacniacz domyślnie uruchamia się w stanie `MUTE` (wyciszony) dla bezpieczeństwa głośników.
     * Automatyczne od-wyciszanie (`AMP_ON`), gdy tylko wykryty zostanie strumień danych audio Bluetooth.
     * Automatyczne przejście w stan `MUTE` po konfigurowalnym czasie bez odtwarzania muzyki (domyślnie 30 sekund).
@@ -356,5 +356,6 @@ Ten projekt jest przeznaczony do kompilacji i wgrania za pomocą PlatformIO IDE 
 ---
 
 ## 📝 Struktura Projektu
+
 
 
