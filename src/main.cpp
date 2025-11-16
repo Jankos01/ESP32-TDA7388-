@@ -92,9 +92,9 @@ void connection_state_changed(esp_a2d_connection_state_t state, void *ptr) {
     setAmpState(AMP_MUTE); 
     standbyTimer = millis(); 
     
-    // === ZMIANA: Używamy stałej z config.h ===
+    
     a2dp_sink.set_volume(DEFAULT_VOLUME); 
-    // ==========================================
+   
 
   } else if (state == ESP_A2D_CONNECTION_STATE_DISCONNECTED || state == ESP_A2D_CONNECTION_STATE_DISCONNECTING) {
     Serial.println("DEBUG: Rozłączono. Przechodzę w MUTE i uruchamiam timer Standby.");
