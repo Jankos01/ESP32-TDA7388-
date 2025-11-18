@@ -62,7 +62,6 @@ Poniższy schemat przedstawia połączenia komponentów z płytką ESP32-DevKitC
 | `+12V` (Zasilacz) | `TDA7388` | `VCC` | Główne zasilanie 12V |
 | `GND` (Wspólna) | `TDA7388` | `GND` | Wspólna Masa |
 
-**Tutaj wstaw link do zdjęcia pokazującego podłączenie wzmacniacza TDA7388:**
 ![Podłączenie wzmacniacza TDA7388](https://i.imgur.com/TwoiEaW.png) #### 3\. Połączenia ➡️ System Chłodzenia (Czujnik + Wentylator)
 
 | Źródło Sygnału | Moduł Docelowy | Pin Docelowy | Uwagi |
@@ -381,6 +380,7 @@ Ten projekt jest przeznaczony do kompilacji i wgrania za pomocą PlatformIO IDE 
 ---
 
 ## 📝 Struktura Projektu
+
 
 
 
