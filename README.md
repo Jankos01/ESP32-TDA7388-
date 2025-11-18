@@ -4,7 +4,7 @@ Projekt  odbiornika audio Bluetooth zbudowanego na bazie modułu ESP32-WROOM-32U
 
 Projekt koncentruje się na stabilności, jakości dźwięku oraz efektywnym zarządzaniu energią i temperaturą, co czyni go idealnym do zastosowań jako stacjonarny system audio.
 
-## 🌟 Główne Funkcje
+##  Główne Funkcje
 
 * **Wysoka Jakość Dźwięku:** Przesyłanie sygnału audio przez interfejs I2S do zewnętrznego przetwornika DAC PCM5102 
 * **Anti-Pop:** Eliminuje nieprzyjemne "stuknięcia" i "pyknięcia" w głośnikach podczas włączania i przełączania stanów wzmacniacza, poprzez precyzyjne sterowanie pinami `MUTE` i `ST-BY`.
@@ -82,7 +82,7 @@ Poniższy schemat przedstawia połączenia komponentów z płytką ESP32-DevKitC
 ### Krok 4: Zapisz i wgraj zmiany na GitHub
 
 ---
-## 💻 Przegląd Kodu
+##  Przegląd Kodu
 
 Projekt składa się z trzech głównych plików: `platformio.ini`, `include/config.h` oraz `src/main.cpp`.
 
@@ -380,6 +380,7 @@ Ten projekt jest przeznaczony do kompilacji i wgrania za pomocą PlatformIO IDE 
 ---
 
 ## 📝 Struktura Projektu
+
 
 
 
